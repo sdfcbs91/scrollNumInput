@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>数字控件</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="scrollNumInput.js"></script>
+        <script src="jquery.mousewheel.min.js"></script>
+        <style>
+            .input-click-up, .input-click-down {
+                position: absolute;
+                width: 9px;
+                height: 7px;
+                cursor: pointer;
+            }
+            .input-click-up{
+                background: url(img/up_gray.png) center no-repeat;
+            }
+            .input-click-up:hover{
+                background: url(img/up_blue.png) center no-repeat;
+            }
+            .input-click-down{
+                background: url(img/down_gray.png) center no-repeat;
+            }
+            .input-click-down:hover{
+                background: url(img/down_blue.png) center no-repeat;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="overflow: hidden;">支持鼠标滚轮</div>
+        <div style="overflow: hidden;position: relative;">示例1:<input id="demo1" />最小值0,最大值5</div>
+        <div style="overflow: hidden;position: relative;margin-top: 10px;">示例2:<input id="demo2" style="height: 30px;line-height: 30px;" />无最大最小值,跨度为100</div>
+        <div style="overflow: hidden;position: relative;margin-top: 10px;">示例3:<input id="demo3" style="height: 30px;line-height: 30px;" />记忆输入错误的上一次获取到的值(暂未实现)</div>
+        <div style="overflow: hidden;position: relative;margin-top: 10px;">示例4:<input id="demo4" style="height: 30px;line-height: 30px;" />输入错误时,纠正为10</div>
+    </body>
+    <script>
+        /* 参数:
+            input元素
+            jquery: "",
+            //每次改变值时的单位长度
+            unit: 1,
+            //输入错误值时:当memory为false,或该元素无上次的输入值,该默认值赋予给元素
+            defaultNum: 0,
+            //输入错误值时:是否记忆上次输入的值,如果为true,元素会获取上次成功获得的值
+            memory: true,
+            //最大值 如果设置成undefined,则无最大值上线
+            max: undefined,
+            min: undefined,
+        */
+        scrollNumInput({ jquery: $("#demo1"), min: 0, max: 5, unit: 1 });
+        scrollNumInput({ jquery: $("#demo2"), unit: 100 });
+        scrollNumInput({ jquery: $("#demo3"), unit: 100,memory:true });//此处有bug，有时间及时处理掉
+        scrollNumInput({ jquery: $("#demo4"), unit: 1,defaultNum:10 });
+    </script>
+</html>
